@@ -136,6 +136,7 @@ export default Ember.Component.extend( TooltipEnabled, {
 
             if ( !containsValue( theme, Theme ) ) {
                 warn( `Invalid theme property value "${theme}"` );
+                return null;
             }
 
             return `progress-bar-${theme}`;
