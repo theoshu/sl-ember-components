@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import TooltipEnabledMixin from 'sl-ember-components/mixins/sl-tooltip-enabled';
-// import * as librariesFunction from '../../helpers/global-libraries';
 import * as librariesFunction from '../../helpers/global-libraries';
 
 moduleForComponent( 'sl-date-time', 'Unit | Component | sl date time', {
