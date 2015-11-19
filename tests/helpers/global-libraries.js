@@ -1,22 +1,21 @@
 import Ember from 'ember';
 import sinon from 'sinon';
 
-export default function( component, options ) {
-    const jqueryAliasSpy = sinon.spy( window, '$' );
-    const jquerySpy = sinon.spy( window, 'jQuery' );
-    const emberJquery = sinon.spy( Ember, '$' );
+export let called;
+export let jqueryAliasSpy;
+export let jquerySpy;
+export let emberJquery;
 
-    if ( options ) {
-        component( options );
-    } else {
-        component();
-    }
+export function setupSpies() {
+    jqueryAliasSpy = sinon.spy( window, '$' );
+    jquerySpy = sinon.spy( window, 'jQuery' );
+    emberJquery = sinon.spy( Ember, '$' );
+}
 
-    const called = jqueryAliasSpy.called || jquerySpy.called || emberJquery.called;
+export function restoreSpies() {
+    called = jqueryAliasSpy.called || jquerySpy.called || emberJquery.called;
 
     window.$.restore();
     window.jQuery.restore();
     Ember.$.restore();
-
-    return !called;
 }

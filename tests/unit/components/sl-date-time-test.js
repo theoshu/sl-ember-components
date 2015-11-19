@@ -1,7 +1,8 @@
 import Ember from 'ember';
 import { moduleForComponent, test } from 'ember-qunit';
 import TooltipEnabledMixin from 'sl-ember-components/mixins/sl-tooltip-enabled';
-import librariesFunction from '../../helpers/global-libraries';
+// import * as librariesFunction from '../../helpers/global-libraries';
+import * as librariesFunction from '../../helpers/global-libraries';
 
 moduleForComponent( 'sl-date-time', 'Unit | Component | sl date time', {
     unit: true
@@ -291,14 +292,15 @@ test( 'init() - "timezone" property needs to be a string', function( assert ) {
 });
 
 test( 'Component does not reference Ember.$, $ or jQuery', function( assert ) {
-    assert.equal(
-        librariesFunction(
-            this.subject,
-            {
-                timezone: 'America/Chicago'
-            }
-        ),
-        true,
+    librariesFunction.setupSpies();
+
+    this.subject( { timezone: 'America/Chicago' } );
+
+    librariesFunction.restoreSpies();
+
+    assert.strictEqual(
+        librariesFunction.called,
+        false,
         'There are no references to Ember.$, $ or jQuery'
     );
 });
